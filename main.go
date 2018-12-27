@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/yenkeia/jvm/classfile"
 	"github.com/yenkeia/jvm/classpath"
 	"strings"
 )
@@ -30,18 +31,25 @@ func main() {
 
 func startJVM(cmd *Cmd) {
 	var (
-		cp        *classpath.Classpath
+		classPath *classpath.Classpath
 		className string
 		err       error
 		classData []byte
+		classFile *classfile.ClassFile
 	)
-	cp = classpath.Parse(cmd.XjreOption, cmd.cpOption)
-	fmt.Printf("classpath:%v class:%v args:%v\n", cp, cmd.class, cmd.args)
+	classPath = classpath.Parse(cmd.XjreOption, cmd.cpOption)
+	fmt.Printf("classpath:%v class:%v args:%v\n", classPath, cmd.class, cmd.args)
 	className = strings.Replace(cmd.class, ".", "/", -1)
-	classData, _, err = cp.ReadClass(className)
+	classData, _, err = classPath.ReadClass(className)
 	if err != nil {
 		fmt.Printf("Could not find or load main class %s\n", cmd.class)
 		return
 	}
-	fmt.Printf("class data:%v\n", classData)
+	//fmt.Printf("class data:%v\n", classData)
+	classFile, err = classfile.Parse(classData)
+	if err != nil {
+		fmt.Println("Parse classFile failed")
+		return
+	}
+	fmt.Println(classFile)
 }
