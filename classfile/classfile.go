@@ -69,3 +69,25 @@ func Parse(classData []byte) (classFile *ClassFile, err error) {
 	classFile.read(classReader)
 	return
 }
+
+// TODO
+// ./jvm -Xjre "/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre" Test
+// func (self *ClassFile) String() string {
+// 	version := fmt.Sprintf("version: %v.%v\n", cf.MajorVersion(), cf.MinorVersion())
+// 	constantsCount := fmt.Sprintf("constants count: %v\n", len(cf.ConstantPool()))
+// 	accessFlags := fmt.Sprintf("access flags: 0x%x\n", cf.AccessFlags())
+// 	thisClass := fmt.Sprintf("this class: %v\n", cf.ClassName())
+// 	superClass := fmt.Sprintf("super class: %v\n", cf.SuperClassName())
+// 	interfaces := fmt.Sprintf("interfaces: %v\n", cf.InterfaceNames())
+// 	fieldsCount := fmt.Sprintf("fields count: %v\n", len(cf.Fields()))
+// 	fields := ""
+// 	for _, f := range cf.Fields() {
+// 		fields += fmt.Sprintf("  %s\n", f.Name())
+// 	}
+// 	methodsCount := fmt.Sprintf("methods count: %v\n", len(cf.Methods()))
+// 	methods := ""
+// 	for _, m := range cf.Methods() {
+// 		methods += fmt.Sprintf("  %s\n", m.Name())
+// 	}
+// 	return version + constantsCount + accessFlags + thisClass + superClass + interfaces + fieldsCount + fields + methodsCount + methods
+// }
